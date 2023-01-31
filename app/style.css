@@ -1,0 +1,110 @@
+/* Add some basic styling to the body */
+body {
+    font: 14px/18px 'Lucida Grande', 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+/* Style the main heading */
+h1 {
+    text-align: center;
+    margin: 2em 0;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.container {
+    margin-top: 5%;
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    grid-gap: 4px;
+}
+
+.form-container {
+    grid-column: 3 / 6;
+    text-align: center;
+}
+
+.image-container {
+    margin-top: 7%;
+    grid-column: 7 / 12;
+    text-align: center;
+}
+
+/* Form group */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Form labels */
+.form-container label {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Form inputs */
+.form-container input[type="text"], .form-group input[type="submit"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 1.2em;
+}
+
+/* Submit button */
+.form-group input[type="submit"] {
+    width: 50%;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#notes {
+    margin-top: 4em;
+    text-align: left;
+    align-items: left;
+}
+
+li {
+    font-size: medium;
+    margin: 0.6rem;
+}
+
+img {
+    margin: auto;
+    display: block;
+    height: 300px;
+    width: auto;
+    max-width:550px;
+    margin-bottom: 6em;
+    object-fit: contain;
+}
+
+fieldset {
+    width: 30%; /* adjust this value as needed */
+    margin: 0 auto; /* center the fieldset within its container */
+    text-align: left;
+}
+
+legend {
+    text-align: center;
+}
+
+.download-group {
+    align-self: center;
+}
+
+#but {
+    text-align: center;
+}
+
+/* Style for the radio buttons */
+.form-group input[type="radio"] {
+    margin: 0.6rem;
+}
