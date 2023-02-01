@@ -20,6 +20,7 @@ import           Data.GraphViz
 import           Data.GraphViz.Attributes.Complete
 
 import Data.Map
+import System.Environment (getEnv)
 
 data MyState = MyState
     { msFSM :: FSM
@@ -37,14 +38,15 @@ makeDummyState =
 main :: IO ()
 main = do
   mystateVar <- STM.newTVarIO makeDummyState
-  scotty 3000 (myApp mystateVar)
+  port <- read <$> getEnv "PORT"
+  scotty port (myApp mystateVar)
 
 myApp :: STM.TVar MyState -> ScottyM ()
 myApp statevar = do
   get "/" $ do
     currstate <- liftIO $ STM.readTVarIO statevar
     let dotGraph = graphToDot (gParams $ accepts $ msFSM currstate) (graphFSM $ msFSM currstate)
-    liftIO $ runGraphvizCommand Dot dotGraph Png "finite-automaton.png"
+    _ <- liftIO $ runGraphvizCommand Dot dotGraph Png "finite-automaton.png"
     html $ renderHtml $ H.docTypeHtml $
       H.html $ do
         H.head $ H.link H.! A.rel "stylesheet" H.! A.type_ "text/css" H.! A.href "style.css"
@@ -131,12 +133,12 @@ myApp statevar = do
         file "finite-automaton.png"
       "svg" -> do
         let dotGraph = graphToDot (gParams $ accepts $ msFSM currstate) (graphFSM $ msFSM currstate)
-        liftIO $ runGraphvizCommand Dot dotGraph Svg "finite-automaton.svg"
+        _ <- liftIO $ runGraphvizCommand Dot dotGraph Svg "finite-automaton.svg"
         setHeader "Content-Disposition" "attachment; filename=finite-automaton.svg"
         file "finite-automaton.png"
       "jpeg" -> do
         let dotGraph = graphToDot (gParams $ accepts $ msFSM currstate) (graphFSM $ msFSM currstate)
-        liftIO $ runGraphvizCommand Dot dotGraph Jpeg "finite-automaton.jpeg"
+        _ <- liftIO $ runGraphvizCommand Dot dotGraph Jpeg "finite-automaton.jpeg"
         setHeader "Content-Disposition" "attachment; filename=finite-automaton.jpeg"
         file "finite-automaton.jpeg"
       "dot" -> do
