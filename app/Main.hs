@@ -38,8 +38,8 @@ makeDummyState =
 main :: IO ()
 main = do
   mystateVar <- STM.newTVarIO makeDummyState
-  -- port <- read <$> getEnv "PORT"
-  scotty 3000 (myApp mystateVar)
+  port <- read <$> getEnv "PORT"
+  scotty port (myApp mystateVar)
 
 myApp :: STM.TVar MyState -> ScottyM ()
 myApp statevar = do
