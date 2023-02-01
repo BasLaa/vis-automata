@@ -46,7 +46,7 @@ myApp statevar = do
   get "/" $ do
     currstate <- liftIO $ STM.readTVarIO statevar
     let dotGraph = graphToDot (gParams $ accepts $ msFSM currstate) (graphFSM $ msFSM currstate)
-    _ <- liftIO $ runGraphvizCommand Dot dotGraph Png "finite-automaton.png"
+    -- _ <- liftIO $ runGraphvizCommand Dot dotGraph Png "finite-automaton.png"
     html $ renderHtml $ H.docTypeHtml $
       H.html $ do
         H.head $ H.link H.! A.rel "stylesheet" H.! A.type_ "text/css" H.! A.href "style.css"
