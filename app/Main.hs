@@ -44,8 +44,8 @@ main = do
 myApp :: STM.TVar MyState -> ScottyM ()
 myApp statevar = do
   get "/" $ do
-    -- currstate <- liftIO $ STM.readTVarIO statevar
-    -- let dotGraph = graphToDot (gParams $ accepts $ msFSM currstate) (graphFSM $ msFSM currstate)
+    currstate <- liftIO $ STM.readTVarIO statevar
+    let dotGraph = graphToDot (gParams $ accepts $ msFSM currstate) (graphFSM $ msFSM currstate)
     -- _ <- liftIO $ runGraphvizCommand Dot dotGraph Png "finite-automaton.png"
     html $ renderHtml $ H.docTypeHtml $
       H.html $ do
@@ -54,29 +54,29 @@ myApp statevar = do
           H.h1 "Finite Automata Visualizer"
           -- H.div H.! A.class_ "container" $ do
 
-            -- H.div H.! A.class_ "form-container" $ do
-            --   H.form H.! A.method "post" H.! A.action "/" $ do
-            --     H.div H.! A.class_ "form-group" $ do
-            --       H.label H.! A.for "states" H.! A.name "states" $ "States: "
-            --       H.input H.! A.type_ "text" H.! A.value (H.toValue $ msStText currstate) H.! A.id "states" H.! A.name "states"
-            --     H.div H.! A.class_ "form-group" $ do
-            --       H.label H.! A.for "start" H.! A.name "start" $ "Start state: "
-            --       H.input H.! A.type_ "text" H.! A.value (H.toValue $ msStartText currstate) H.! A.id "start" H.! A.name "start"
-            --     H.div H.! A.class_ "form-group" $ do
-            --       H.label H.! A.for "accepts" H.! A.name "accepts" $ "Accept states: "
-            --       H.input H.! A.type_ "text" H.! A.value (H.toValue $ msAccText currstate) H.! A.id "accepts" H.! A.name "accepts"
-            --     H.div H.! A.class_ "form-group" $ do
-            --       H.label H.! A.for "transitions" H.! A.name "transitions" $ "Transitions : "
-            --       H.input H.! A.type_ "text" H.! A.value (H.toValue $ msTransText currstate) H.! A.id "transitions" H.! A.name "transitions"
-            --     H.div H.! A.class_ "form-group" H.! A.id "but" $ do
-            --       H.input H.! A.type_ "submit" H.! A.value "Create Automaton"
+          --   H.div H.! A.class_ "form-container" $ do
+          --     H.form H.! A.method "post" H.! A.action "/" $ do
+          --       H.div H.! A.class_ "form-group" $ do
+          --         H.label H.! A.for "states" H.! A.name "states" $ "States: "
+          --         H.input H.! A.type_ "text" H.! A.value (H.toValue $ msStText currstate) H.! A.id "states" H.! A.name "states"
+          --       H.div H.! A.class_ "form-group" $ do
+          --         H.label H.! A.for "start" H.! A.name "start" $ "Start state: "
+          --         H.input H.! A.type_ "text" H.! A.value (H.toValue $ msStartText currstate) H.! A.id "start" H.! A.name "start"
+          --       H.div H.! A.class_ "form-group" $ do
+          --         H.label H.! A.for "accepts" H.! A.name "accepts" $ "Accept states: "
+          --         H.input H.! A.type_ "text" H.! A.value (H.toValue $ msAccText currstate) H.! A.id "accepts" H.! A.name "accepts"
+          --       H.div H.! A.class_ "form-group" $ do
+          --         H.label H.! A.for "transitions" H.! A.name "transitions" $ "Transitions : "
+          --         H.input H.! A.type_ "text" H.! A.value (H.toValue $ msTransText currstate) H.! A.id "transitions" H.! A.name "transitions"
+          --       H.div H.! A.class_ "form-group" H.! A.id "but" $ do
+          --         H.input H.! A.type_ "submit" H.! A.value "Create Automaton"
               
-            --   H.div H.! A.id "notes" $ do
-            --     H.h2 "Notes: "
-            --     H.ul $ do
-            --       H.li "States and Accept States should be separated by spaces"
-            --       H.li "There may only be a single Start State"
-            --       H.li "Transitions should be separated by semicolons and of the form \"state state symbol\""
+          --     H.div H.! A.id "notes" $ do
+          --       H.h2 "Notes: "
+          --       H.ul $ do
+          --         H.li "States and Accept States should be separated by spaces"
+          --         H.li "There may only be a single Start State"
+          --         H.li "Transitions should be separated by semicolons and of the form \"state state symbol\""
 
             -- H.div H.! A.class_ "image-container" $ do
             --   H.img H.! A.src "/image.png"
