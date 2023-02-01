@@ -78,30 +78,30 @@ myApp statevar = do
                   H.li "There may only be a single Start State"
                   H.li "Transitions should be separated by semicolons and of the form \"state state symbol\""
 
-            -- H.div H.! A.class_ "image-container" $ do
-            --   H.img H.! A.src "/image.png"
-            --   H.form H.! A.method "post" H.! A.id "download-group" H.! A.action "/download" $ do
-            --     H.div H.! A.class_ "form-group" $ do
-            --       H.fieldset $ do
-            --         H.legend "Select a file type: "
-            --         H.div $ do
-            --           H.label $ do
-            --             H.input H.! A.type_ "radio" H.! A.name "filetype" H.! A.value "png" H.! A.checked "checked"
-            --             "PNG"
-            --         H.div $ do
-            --           H.label $ do
-            --             H.input H.! A.type_ "radio" H.! A.name "filetype" H.! A.value "jpeg"
-            --             "JPEG"
-            --         H.div $ do
-            --           H.label $ do
-            --             H.input H.! A.type_ "radio" H.! A.name "filetype" H.! A.value "svg"
-            --             "SVG"
-            --         H.div $ do
-            --           H.label $ do
-            --             H.input H.! A.type_ "radio" H.! A.name "filetype" H.! A.value "dot"
-            --             "Dot"                
-            --     H.div H.! A.class_ "form-group" H.! A.id "but" $ do
-            --       H.input H.! A.type_ "submit" H.! A.value "Download"
+            H.div H.! A.class_ "image-container" $ do
+              H.img H.! A.src "/image.png"
+              H.form H.! A.method "post" H.! A.id "download-group" H.! A.action "/download" $ do
+                H.div H.! A.class_ "form-group" $ do
+                  H.fieldset $ do
+                    H.legend "Select a file type: "
+                    H.div $ do
+                      H.label $ do
+                        H.input H.! A.type_ "radio" H.! A.name "filetype" H.! A.value "png" H.! A.checked "checked"
+                        "PNG"
+                    H.div $ do
+                      H.label $ do
+                        H.input H.! A.type_ "radio" H.! A.name "filetype" H.! A.value "jpeg"
+                        "JPEG"
+                    H.div $ do
+                      H.label $ do
+                        H.input H.! A.type_ "radio" H.! A.name "filetype" H.! A.value "svg"
+                        "SVG"
+                    H.div $ do
+                      H.label $ do
+                        H.input H.! A.type_ "radio" H.! A.name "filetype" H.! A.value "dot"
+                        "Dot"                
+                H.div H.! A.class_ "form-group" H.! A.id "but" $ do
+                  H.input H.! A.type_ "submit" H.! A.value "Download"
 
 
   get "/style.css" $ file "app/style.css"
