@@ -7,18 +7,20 @@ version: 2.1
 jobs:
   build-project:
     machine: true
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - run: bash .circleci/setup_heroku.sh
-      - run: echo $DOCKER_PASSWORD | docker login \
-                                     --username=$DOCKER_USERNAME \
-                                     --password-stdin
-      - run: docker pull \                
-               registry.heroku.com/$HEROKU_APP/web:$CIRCLE_BRANCH
-      - run: docker build -t \
-               registry.heroku.com/$HEROKU_APP/web:$CIRCLE_BRANCH
-      - run: docker push \
-               registry.heroku.com/$HEROKU_APP/web:$CIRCLE_BRANCH
+      - run: wget https://github.com/commercialhaskell/stack/releases/download/v2.9.3/stack-2.9.3-linux-x86_64.tar.gz -O /tmp/stack.tar.gz
+      - run: sudo mkdir /tmp/stack-download
+      - run: sudo tar -xzf /tmp/stack.tar.gz -C /tmp/stack-download
+      - run: sudo chmod +x /tmp/stack-download/stack-2.9.3-linux-x86_64/stack
+      - run: sudo mv /tmp/stack-download/stack-2.9.3-linux-x86_64/stack /usr/bin/stack
+      - run: stack setup
+      - run: stack test
       - save_cache:
           key: stack-{{ checksum "stack.yaml" }}
           paths:
