@@ -9,7 +9,7 @@ jobs:
     machine: true
     steps:
       - checkout
-      - bash .circleci/setup_heroku.sh
+      - run: bash .circleci/setup_heroku.sh
       - run: echo $DOCKER_PASSWORD | docker login \
                                      --username=$DOCKER_USERNAME \
                                      --password-stdin
